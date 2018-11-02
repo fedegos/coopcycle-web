@@ -48,11 +48,11 @@ install:
   - docker run -t -v $(pwd)/var/osrm:/data -d -p 5000:5000 osrm/osrm-backend:latest osrm-routed --algorithm mld /data/paris-france.osrm
   - docker run -t -d -p 12111:12111 stripemock/stripe-mock
   # - docker pull elgalu/selenium-hub
-  - docker run -d --name=grid -p 4444:24444 -p 5900:25900 -e TZ="Europe/Paris" -v /dev/shm:/dev/shm --privileged elgalu/selenium
+  # - docker run -d --name=grid -p 4444:24444 -p 5900:25900 -e TZ="Europe/Paris" -v /dev/shm:/dev/shm --privileged elgalu/selenium
+  - docker run -t -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
+  - docker run -t -d --link selenium-hub:hub --name selenium-node-chrome -v /dev/shm:/dev/shm selenium/node-chrome:3.14.0-francium
   - docker exec grid wait_all_done 30s
   # - wget --retry-connrefused --no-check-certificate -T 30  http://localhost:4444/grid/console -O /dev/null
-  # - docker run -t -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
-  # - docker run -t -d --link selenium-hub:hub --name selenium-node-chrome -v /dev/shm:/dev/shm selenium/node-chrome:3.14.0-francium
 
 before_script:
   - phpenv config-rm xdebug.ini
@@ -76,7 +76,7 @@ before_script:
   # - "export DISPLAY=:99.0"
   # - "sh -e /etc/init.d/xvfb start"
   # - sleep 5 # give xvfb some time to start
-  - php bin/console server:start -vvv --env=test 127.0.0.1:8080
+  - php bin/console server:start 127.0.0.1:8080 --env=test
   - curl -v http://127.0.0.1:8080/
   - cp phpunit.xml.dist phpunit.xml
   # Install JavaScript stuff
