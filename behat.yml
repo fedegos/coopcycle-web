@@ -16,7 +16,8 @@ default:
     Behat\MinkExtension:
       # FIXME Use BEHAT_PARAMS in docker-compose.yml
       # http://behat.org/en/latest/user_guide/configuration.html#environment-variable-behat-params
-      base_url: "http://nginx:80/"
+      # base_url: "http://nginx:80/"
+      base_url: "http://127.0.0.1:8080"
       default_session: "default"
       javascript_session: "selenium2"
       sessions:
@@ -25,7 +26,8 @@ default:
         selenium2:
           selenium2:
             browser: "chrome"
-            wd_host: "http://selenium:4444/wd/hub"
+            # wd_host: "http://selenium:4444/wd/hub"
+            wd_host: "http://localhost:4444/wd/hub"
     Behatch\Extension: ~
 
 # FIXME Use BEHAT_PARAMS

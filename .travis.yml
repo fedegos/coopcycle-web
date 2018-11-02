@@ -28,7 +28,6 @@ env:
 before_install:
   - sudo apt-get update -qq
   - nvm install 8
-
   - docker pull selenium/hub:3.14.0-francium
   - docker pull selenium/node-chrome:3.14.0-francium
   - docker run -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
