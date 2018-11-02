@@ -25,3 +25,8 @@ default:
             browser: "chrome"
             wd_host: "http://selenium:4444/wd/hub"
     Behatch\Extension: ~
+
+travis:
+  extensions:
+    Behat\MinkExtension:
+      base_url: "http://localhost/"
