@@ -16,11 +16,12 @@ default:
     Behat\MinkExtension:
       base_url: "http://nginx:80/"
       default_session: "default"
+      javascript_session: "selenium2"
       sessions:
         default:
-          # symfony2: ~
+          symfony2: ~
+        selenium2:
           selenium2:
             browser: "chrome"
-            # wd_host: http://localhost:9080/wd/hub
             wd_host: "http://selenium:4444/wd/hub"
     Behatch\Extension: ~
