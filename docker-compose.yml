@@ -112,6 +112,20 @@ services:
     ports:
       - '12111:12111'
 
+  selenium:
+    image: selenium/hub:3.14.0-francium
+    container_name: selenium
+    ports:
+      - "4444:4444"
+
+  chrome:
+    image: selenium/node-chrome:3.14.0-francium
+    depends_on:
+      - selenium
+    environment:
+      - HUB_HOST=selenium
+      - HUB_PORT=4444
+
 volumes:
   node_modules:
   pg_data:

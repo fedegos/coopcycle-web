@@ -14,8 +14,13 @@ default:
         env: "test"
         debug: "true"
     Behat\MinkExtension:
-      base_url: "http://example.com/"
+      base_url: "http://nginx:80/"
+      default_session: "default"
       sessions:
         default:
-          symfony2: ~
+          # symfony2: ~
+          selenium2:
+            browser: "chrome"
+            # wd_host: http://localhost:9080/wd/hub
+            wd_host: "http://selenium:4444/wd/hub"
     Behatch\Extension: ~
