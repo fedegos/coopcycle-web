@@ -47,8 +47,11 @@ install:
   - docker run -t -v $(pwd)/var/osrm:/data osrm/osrm-backend:latest osrm-customize /data/paris-france.osrm
   - docker run -t -v $(pwd)/var/osrm:/data -d -p 5000:5000 osrm/osrm-backend:latest osrm-routed --algorithm mld /data/paris-france.osrm
   - docker run -t -d -p 12111:12111 stripemock/stripe-mock
-  - docker run -t -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
-  - docker run -t -d --link selenium-hub:hub --name selenium-node-chrome -v /dev/shm:/dev/shm selenium/node-chrome:3.14.0-francium
+  - docker pull elgalu/selenium
+  - docker run -d --name=grid -p 4444:24444 -p 5900:25900 -e TZ="Europe/Paris" -v /dev/shm:/dev/shm --privileged elgalu/selenium
+  - wget --retry-connrefused --no-check-certificate -T 30  http://localhost:4444/grid/console -O /dev/null
+  # - docker run -t -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
+  # - docker run -t -d --link selenium-hub:hub --name selenium-node-chrome -v /dev/shm:/dev/shm selenium/node-chrome:3.14.0-francium
 
 before_script:
   - phpenv config-rm xdebug.ini
