@@ -30,18 +30,18 @@ default:
             wd_host: "http://localhost:4444/wd/hub"
     Behatch\Extension: ~
 
-# FIXME Use BEHAT_PARAMS
-# http://behat.org/en/latest/user_guide/configuration.html#environment-variable-behat-params
-travis:
-  extensions:
-    Behat\MinkExtension:
-      base_url: "http://127.0.0.1:8080"
-      selenium2:
-        wd_host: "http://localhost:4444/wd/hub"
-        # wd_host: "http://localhost:8643/wd/hub"
-        # capabilities:
-        #   chrome:
-        #     switches:
-        #       - "--headless"
-        #       - "--disable-gpu"
-        #       - "--no-sandbox"
+# # FIXME Use BEHAT_PARAMS
+# # http://behat.org/en/latest/user_guide/configuration.html#environment-variable-behat-params
+# travis:
+#   extensions:
+#     Behat\MinkExtension:
+#       base_url: "http://127.0.0.1:8080"
+#       selenium2:
+#         wd_host: "http://localhost:4444/wd/hub"
+#         # wd_host: "http://localhost:8643/wd/hub"
+#         # capabilities:
+#         #   chrome:
+#         #     switches:
+#         #       - "--headless"
+#         #       - "--disable-gpu"
+#         #       - "--no-sandbox"
