@@ -20,14 +20,24 @@ default:
       base_url: "http://127.0.0.1:8080"
       default_session: "default"
       javascript_session: "selenium2"
+      browser_name: "chrome"
       sessions:
         default:
           symfony2: ~
         selenium2:
           selenium2:
             browser: "chrome"
+            # wd_host: "http://localhost:4444/wd/hub"
+            wd_host: "http://localhost:8643/wd/hub"
+            capabilities:
+              chrome:
+                switches:
+                  - "--headless"
+                  - "--disable-gpu"
+                  - "--no-sandbox"
             # wd_host: "http://selenium:4444/wd/hub"
-            wd_host: "http://localhost:4444/wd/hub"
+
+
     Behatch\Extension: ~
 
 # # FIXME Use BEHAT_PARAMS

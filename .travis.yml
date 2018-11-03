@@ -1,6 +1,7 @@
 notifications:
   email: false
 
+dist: trusty
 sudo: required
 
 matrix:
@@ -28,6 +29,7 @@ env:
 before_install:
   - sudo apt-get update -qq
   - nvm install 8
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=8643 http://localhost &
   # - docker pull selenium/hub:3.14.0-francium
   # - docker pull selenium/node-chrome:3.14.0-francium
   # - docker run -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
@@ -49,10 +51,10 @@ install:
   - docker run -t -d -p 12111:12111 stripemock/stripe-mock
   # - docker pull elgalu/selenium-hub
   # - docker run -d --name=grid -p 4444:24444 -p 5900:25900 -e TZ="Europe/Paris" -v /dev/shm:/dev/shm --privileged elgalu/selenium
-  - docker run -t -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
-  - docker run -t -d --link selenium-hub:hub --name selenium-node-chrome -v /dev/shm:/dev/shm selenium/node-chrome:3.14.0-francium
-  # - docker exec selenium-hub wait_all_done 30s
-  - wget --retry-connrefused --no-check-certificate -T 30 http://localhost:4444/grid/console -O /dev/null
+  # - docker run -t -d -p 4444:4444 --name selenium-hub selenium/hub:3.14.0-francium
+  # - docker run -t -d --link selenium-hub:hub --name selenium-node-chrome -v /dev/shm:/dev/shm selenium/node-chrome:3.14.0-francium
+  # # - docker exec selenium-hub wait_all_done 30s
+  # - wget --retry-connrefused --no-check-certificate -T 30 http://localhost:4444/grid/console -O /dev/null
 
 before_script:
   - phpenv config-rm xdebug.ini
@@ -73,11 +75,11 @@ before_script:
   - php composer.phar install --prefer-dist
   - php bin/console doctrine:schema:create --env=test
   # - psql -U postgres -d coopcycle_test -f tests/AppBundle/Resources/sql/restaurants.sql > /dev/null
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  # - "export DISPLAY=:99.0"
+  # - "sh -e /etc/init.d/xvfb start"
   - sleep 5 # give xvfb some time to start
   - php bin/console server:start 127.0.0.1:8080
-  - wget --retry-connrefused --no-check-certificate -T 30 http://127.0.0.1:4444/grid/console -O /dev/null
+  # - wget --retry-connrefused --no-check-certificate -T 30 http://127.0.0.1:4444/grid/console -O /dev/null
   - curl -v http://127.0.0.1:8080/fr/
   - cp phpunit.xml.dist phpunit.xml
   # Install JavaScript stuff
