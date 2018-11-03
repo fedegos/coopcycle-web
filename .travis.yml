@@ -76,7 +76,7 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 5 # give xvfb some time to start
-  - php bin/console server:start 127.0.0.1:8080
+  - php bin/console server:start 127.0.0.1:8080 &
   - wget --retry-connrefused --no-check-certificate -T 30 http://127.0.0.1:4444/grid/console -O /dev/null
   - curl -v http://127.0.0.1:8080/fr/
   - cp phpunit.xml.dist phpunit.xml
