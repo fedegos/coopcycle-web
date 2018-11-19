@@ -78,3 +78,4 @@ script:
   - php vendor/bin/behat -f progress
   - node node_modules/.bin/mocha --require babel-core/register --exit js/tests/
   - cat /home/travis/.pm2/logs/coopcycle-tracking-default-error.log
+  - cat /home/travis/.pm2/logs/coopcycle-dispatch-default-error.log
